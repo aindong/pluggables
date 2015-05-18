@@ -117,16 +117,17 @@ class PluggablesServiceProvider extends ServiceProvider
     private function registerConsoleCommands()
     {
         $this->registerMakeCommand();
-        $this->registerEnableCommand();
-        $this->registerDisableCommand();
-        $this->registerMakeMigrationCommand();
-        $this->registerMakeRequestCommand();
-        $this->registerMigrateCommand();
-        $this->registerMigrateRefreshCommand();
-        $this->registerMigrateResetCommand();
-        $this->registerMigrateRollbackCommand();
-        $this->registerSeedCommand();
-        $this->registerListCommand();
+//        $this->registerEnableCommand();
+//        $this->registerDisableCommand();
+//        $this->registerMakeMigrationCommand();
+//        $this->registerMakeRequestCommand();
+//        $this->registerMigrateCommand();
+//        $this->registerMigrateRefreshCommand();
+//        $this->registerMigrateResetCommand();
+//        $this->registerMigrateRollbackCommand();
+//        $this->registerSeedCommand();
+//        $this->registerListCommand();
+
         $this->commands([
             'pluggables.make',
             'pluggables.enable',
@@ -165,18 +166,20 @@ class PluggablesServiceProvider extends ServiceProvider
 //            return new Console\ModuleDisableCommand;
 //        });
 //    }
-//    /**
-//     * Register the "module:make" console command.
-//     *
-//     * @return Console\ModuleMakeCommand
-//     */
-//    protected function registerMakeCommand()
-//    {
-//        $this->app->bindShared('modules.make', function($app) {
-//            $handler = new Handlers\ModuleMakeHandler($app['modules'], $app['files']);
-//            return new Console\ModuleMakeCommand($handler);
-//        });
-//    }
+
+    /**
+     * Register the "pluggables:make" console command.
+     *
+     * @return Console\PluggableMakeCommand
+     */
+    protected function registerMakeCommand()
+    {
+        $this->app->bindShared('pluggable.make', function($app) {
+            $handler = new Handlers\PluggableMakeHandler($app['pluggables'], $app['files']);
+            return new Console\PluggableMakeCommand($handler);
+        });
+    }
+
 //    /**
 //     * Register the "module:make:migration" console command.
 //     *
