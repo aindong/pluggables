@@ -117,55 +117,13 @@ class PluggablesServiceProvider extends ServiceProvider
     private function registerConsoleCommands()
     {
         $this->registerMakeCommand();
-//        $this->registerEnableCommand();
-//        $this->registerDisableCommand();
-//        $this->registerMakeMigrationCommand();
-//        $this->registerMakeRequestCommand();
-//        $this->registerMigrateCommand();
-//        $this->registerMigrateRefreshCommand();
-//        $this->registerMigrateResetCommand();
-//        $this->registerMigrateRollbackCommand();
-//        $this->registerSeedCommand();
-//        $this->registerListCommand();
 
         $this->commands([
             'pluggables.make'
-            // 'pluggables.enable',
-            // 'pluggables.disable',
-            // 'pluggables.makeMigration',
-            // 'pluggables.makeRequest',
-            // 'pluggables.migrate',
-            // 'pluggables.migrateRefresh',
-            // 'pluggables.migrateReset',
-            // 'pluggables.migrateRollback',
-            // 'pluggables.seed',
-            // 'pluggables.list'
         ]);
     }
 
     // TODO: REGISTER CONSOLE COMMANDS
-//    /**
-//     * Register the "module:enable" console command.
-//     *
-//     * @return Console\ModuleEnableCommand
-//     */
-//    protected function registerEnableCommand()
-//    {
-//        $this->app->bindShared('modules.enable', function() {
-//            return new Console\ModuleEnableCommand;
-//        });
-//    }
-//    /**
-//     * Register the "module:disable" console command.
-//     *
-//     * @return Console\ModuleDisableCommand
-//     */
-//    protected function registerDisableCommand()
-//    {
-//        $this->app->bindShared('modules.disable', function() {
-//            return new Console\ModuleDisableCommand;
-//        });
-//    }
 
     /**
      * Register the "pluggables:make" console command.
@@ -180,95 +138,6 @@ class PluggablesServiceProvider extends ServiceProvider
         });
     }
 
-//    /**
-//     * Register the "module:make:migration" console command.
-//     *
-//     * @return Console\ModuleMakeMigrationCommand
-//     */
-//    protected function registerMakeMigrationCommand()
-//    {
-//        $this->app->bindShared('modules.makeMigration', function($app) {
-//            $handler = new Handlers\ModuleMakeMigrationHandler($app['modules'], $app['files']);
-//            return new Console\ModuleMakeMigrationCommand($handler);
-//        });
-//    }
-//    /**
-//     * Register the "module:make:request" console command.
-//     *
-//     * @return Console\ModuleMakeRequestCommand
-//     */
-//    protected function registerMakeRequestCommand()
-//    {
-//        $this->app->bindShared('modules.makeRequest', function($app) {
-//            $handler = new Handlers\ModuleMakeRequestHandler($app['modules'], $app['files']);
-//            return new Console\ModuleMakeRequestCommand($handler);
-//        });
-//    }
-//    /**
-//     * Register the "module:migrate" console command.
-//     *
-//     * @return Console\ModuleMigrateCommand
-//     */
-//    protected function registerMigrateCommand()
-//    {
-//        $this->app->bindShared('modules.migrate', function($app) {
-//            return new Console\ModuleMigrateCommand($app['migrator'], $app['modules']);
-//        });
-//    }
-//    /**
-//     * Register the "module:migrate:refresh" console command.
-//     *
-//     * @return Console\ModuleMigrateRefreshCommand
-//     */
-//    protected function registerMigrateRefreshCommand()
-//    {
-//        $this->app->bindShared('modules.migrateRefresh', function() {
-//            return new Console\ModuleMigrateRefreshCommand;
-//        });
-//    }
-//    /**
-//     * Register the "module:migrate:reset" console command.
-//     *
-//     * @return Console\ModuleMigrateResetCommand
-//     */
-//    protected function registerMigrateResetCommand()
-//    {
-//        $this->app->bindShared('modules.migrateReset', function($app) {
-//            return new Console\ModuleMigrateResetCommand($app['modules'], $app['files'], $app['migrator']);
-//        });
-//    }
-//    /**
-//     * Register the "module:migrate:rollback" console command.
-//     *
-//     * @return Console\ModuleMigrateRollbackCommand
-//     */
-//    protected function registerMigrateRollbackCommand()
-//    {
-//        $this->app->bindShared('modules.migrateRollback', function($app) {
-//            return new Console\ModuleMigrateRollbackCommand($app['modules']);
-//        });
-//    }
-//    /**
-//     * Register the "module:seed" console command.
-//     *
-//     * @return Console\ModuleSeedCommand
-//     */
-//    protected function registerSeedCommand()
-//    {
-//        $this->app->bindShared('modules.seed', function($app) {
-//            return new Console\ModuleSeedCommand($app['modules']);
-//        });
-//    }
-//    /**
-//     * Register the "module:list" console command.
-//     *
-//     * @return Console\ModuleListCommand
-//     */
-//    protected function registerListCommand()
-//    {
-//        $this->app->bindShared('modules.list', function($app) {
-//            return new Console\ModuleListCommand($app['modules']);
-//        });
-//    }
+
 
 }
