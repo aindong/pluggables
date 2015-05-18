@@ -129,17 +129,17 @@ class PluggablesServiceProvider extends ServiceProvider
 //        $this->registerListCommand();
 
         $this->commands([
-            'pluggables.make',
-            'pluggables.enable',
-            'pluggables.disable',
-            'pluggables.makeMigration',
-            'pluggables.makeRequest',
-            'pluggables.migrate',
-            'pluggables.migrateRefresh',
-            'pluggables.migrateReset',
-            'pluggables.migrateRollback',
-            'pluggables.seed',
-            'pluggables.list'
+            'pluggables.make'
+            // 'pluggables.enable',
+            // 'pluggables.disable',
+            // 'pluggables.makeMigration',
+            // 'pluggables.makeRequest',
+            // 'pluggables.migrate',
+            // 'pluggables.migrateRefresh',
+            // 'pluggables.migrateReset',
+            // 'pluggables.migrateRollback',
+            // 'pluggables.seed',
+            // 'pluggables.list'
         ]);
     }
 
@@ -174,7 +174,7 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerMakeCommand()
     {
-        $this->app->bindShared('pluggable.make', function($app) {
+        $this->app->bindShared('pluggables.make', function($app) {
             $handler = new Handlers\PluggableMakeHandler($app['pluggables'], $app['files']);
             return new Console\PluggableMakeCommand($handler);
         });
