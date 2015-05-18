@@ -58,11 +58,11 @@ class Pluggables implements Countable
     protected function registerServiceProvider($pluggable)
     {
         $pluggable      = Str::studly($pluggable['slug']);
-        $file           = $this->getPath().'/{$pluggable}/Providers/{$pluggable}ServiceProvider.php';
-        $namespace      = $this->getNamespace().$pluggable.'\\Providers\\{$pluggable}ServiceProvider';
+        $file           = $this->getPath()."/{$pluggable}/Providers/{$pluggable}ServiceProvider.php";
+        $namespace      = $this->getNamespace()."{$pluggable}\\Providers\\{$pluggable}ServiceProvider";
 
         if ( ! $this->files->exists($file)) {
-            $message = 'Pluggable [{$pluggable}] must have a "{$pluggable}/Providers/{$pluggable}ServiceProvider.php" file';
+            $message = "Pluggable [{$pluggable}] must have a \"{$pluggable}/Providers/{$pluggable}ServiceProvider.php\" file";
 
             throw new FileNotFoundException($message);
         }
