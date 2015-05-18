@@ -12,7 +12,7 @@ return [
     | copy your module assets (CSS, images, etc.) to your public directory.
     |
     */
-    'path' => app_path('Modules'),
+    'path' => app_path('Pluggables'),
 
     /*
     |--------------------------------------------------------------------------
@@ -24,5 +24,5 @@ return [
     | by the module:make Artisan command.
     |
     */
-    'namespace' => 'App\Modules\\'
+    'namespace' => 'App\Pluggables\\'
 ];
