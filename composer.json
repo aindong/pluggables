@@ -25,11 +25,6 @@
       "Aindong\\Pluggables\\": "src/Aindong/Pluggables/"
     }
   },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0-dev"
-    }
-  },
   "minimum-stability": "dev",
   "suggest": {
     "wikimedia/composer-merge-plugin": "Allows the ability to create and merge composer.json files for your individual modules for module-specific dependency management."
