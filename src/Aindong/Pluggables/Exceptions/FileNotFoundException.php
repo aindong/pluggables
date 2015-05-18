@@ -1,4 +1,4 @@
 <?php
-namespace Caffeinated\Modules\Exceptions;
+namespace Aindong\Pluggables\Exceptions;
 
 class FileNotFoundException extends \Exception {}

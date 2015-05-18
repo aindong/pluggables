@@ -1,6 +1,16 @@
 <?php
 namespace Aindong\Pluggables;
 
-class Pluggables {
+use App;
+use Countable;
+use Aindong\Pluggables\Exceptions\FileNotFoundException;
+class Pluggables implements Countable
+{
 
+
+
+    public function count()
+    {
+
+    }
 }
