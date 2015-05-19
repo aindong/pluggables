@@ -119,50 +119,64 @@ class PluggablesServiceProvider extends ServiceProvider
         $this->registerMakeCommand();
         $this->registerEnableCommand();
         $this->registerDisableCommand();
+        $this->registerListCommand();
 
         $this->commands([
-            'pluggable.make',
-            'pluggable.enable',
-            'pluggable.disable'
+            'pluggables.make',
+            'pluggables.enable',
+            'pluggables.disable',
+            'pluggables.list'
         ]);
     }
 
     // TODO: REGISTER CONSOLE COMMANDS
 
     /**
-     * Register the "pluggable:make" console command.
+     * Register the "pluggables:make" console command.
      *
      * @return Console\PluggableMakeCommand
      */
     protected function registerMakeCommand()
     {
-        $this->app->bindShared('pluggable.make', function($app) {
+        $this->app->bindShared('pluggables.make', function($app) {
             $handler = new Handlers\PluggableMakeHandler($app['pluggables'], $app['files']);
             return new Console\PluggableMakeCommand($handler);
         });
     }
 
     /**
-     * Register the "pluggable:enable" console command.
+     * Register the "pluggables:enable" console command.
      *
      * @return Console\PluggableDisableCommand
      */
     protected function registerEnableCommand()
     {
-        $this->app->bindShared('pluggable.enable', function() {
+        $this->app->bindShared('pluggables.enable', function() {
             return new Console\PluggableDisableCommand;
         });
     }
 
     /**
-     * Register the "pluggable:disable" console command.
+     * Register the "pluggables:disable" console command.
      *
      * @return Console\PluggableDisableCommand
      */
     protected function registerDisableCommand()
     {
-        $this->app->bindShared('pluggable.disable', function() {
+        $this->app->bindShared('pluggables.disable', function() {
             return new Console\PluggableDisableCommand;
+        });
+    }
+
+    /**
+     * Register the "pluggables:list" console command.
+     *
+     * @return Console\PluggableListCommand
+     */
+    protected function registerListCommand()
+    {
+        $this->app->bindShared('pluggables.list', function($app) {
+            return new Console\PluggableListCommand($app['pluggables']);
         });
     }
 

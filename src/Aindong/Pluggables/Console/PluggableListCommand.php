@@ -9,7 +9,7 @@ class PluggableListCommand extends Command
     /**
      * @var string $name The console command name.
      */
-    protected $name = 'pluggable:list';
+    protected $name = 'pluggables:list';
 
     /**
      * @var string $description The console command description.
