@@ -190,7 +190,7 @@ class PluggablesServiceProvider extends ServiceProvider
     protected function registerMigrateCommand()
     {
         $this->app->bindShared('pluggables.migrate', function($app) {
-            return new Console\PluggableMakeMigrationCommand($app['migrator'], $app['modules']);
+            return new Console\PluggableMakeMigrationCommand($app['migrator'], $app['pluggables']);
         });
     }
 
