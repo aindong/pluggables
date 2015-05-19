@@ -1,0 +1,56 @@
+<?php
+namespace Aindong\Pluggable\Console;
+
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
+
+class ModuleDisableCommand extends Command
+{
+    /**
+     * @var string $name The console command name.
+     */
+    protected $name = 'pluggable:disable';
+
+    /**
+     * @var string $description The console command description.
+     */
+    protected $description = 'Disable a pluggable';
+
+    /**
+     * Create a new command instance.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function fire()
+    {
+        $pluggable = $this->argument('module');
+
+        if ($this->laravel['pluggables']->isEnabled($this->argument('pluggable'))) {
+            $this->laravel['pluggables']->disable($pluggable);
+
+            $this->info("Pluggable [{$pluggable}] was disabled successfully.");
+        } else {
+            $this->comment("Pluggable [{$pluggable}] is already disabled.");
+        }
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['pluggable', InputArgument::REQUIRED, 'Pluggable slug.']
+        ];
+    }
+}

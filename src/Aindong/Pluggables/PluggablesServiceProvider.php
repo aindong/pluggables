@@ -119,7 +119,8 @@ class PluggablesServiceProvider extends ServiceProvider
         $this->registerMakeCommand();
 
         $this->commands([
-            'pluggables.make'
+            'pluggable.make',
+            'pluggable.disable'
         ]);
     }
 
@@ -132,7 +133,7 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerMakeCommand()
     {
-        $this->app->bindShared('pluggables.make', function($app) {
+        $this->app->bindShared('pluggable.make', function($app) {
             $handler = new Handlers\PluggableMakeHandler($app['pluggables'], $app['files']);
             return new Console\PluggableMakeCommand($handler);
         });
