@@ -127,7 +127,8 @@ class PluggablesServiceProvider extends ServiceProvider
             'pluggables.makeMigration',
             'pluggables.enable',
             'pluggables.disable',
-            'pluggables.list'
+            'pluggables.list',
+            'pluggables.make'
         ]);
     }
 
