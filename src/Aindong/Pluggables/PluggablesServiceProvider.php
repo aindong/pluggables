@@ -120,12 +120,14 @@ class PluggablesServiceProvider extends ServiceProvider
         $this->registerEnableCommand();
         $this->registerDisableCommand();
         $this->registerListCommand();
+        $this->registerMigrateCommand();
 
         $this->commands([
             'pluggables.make',
             'pluggables.enable',
             'pluggables.disable',
-            'pluggables.list'
+            'pluggables.list',
+            'pluggables.migrate'
         ]);
     }
 
@@ -177,6 +179,18 @@ class PluggablesServiceProvider extends ServiceProvider
     {
         $this->app->bindShared('pluggables.list', function($app) {
             return new Console\PluggableListCommand($app['pluggables']);
+        });
+    }
+
+    /**
+     * Register the "pluggables:make:migrate" console command.
+     *
+     * @return Console\PluggableMakeMigrationCommand
+     */
+    protected function registerMigrateCommand()
+    {
+        $this->app->bindShared('pluggables.migrate', function($app) {
+            return new Console\PluggableMakeMigrationCommand($app['migrator'], $app['modules']);
         });
     }
 
