@@ -152,7 +152,7 @@ class PluggablesServiceProvider extends ServiceProvider
     protected function registerEnableCommand()
     {
         $this->app->bindShared('pluggables.enable', function() {
-            return new Console\PluggableDisableCommand;
+            return new Console\PluggableEnableCommand;
         });
     }
 
