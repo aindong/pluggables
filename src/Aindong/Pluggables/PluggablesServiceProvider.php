@@ -117,9 +117,12 @@ class PluggablesServiceProvider extends ServiceProvider
     private function registerConsoleCommands()
     {
         $this->registerMakeCommand();
+        $this->registerEnableCommand();
+        $this->registerDisableCommand();
 
         $this->commands([
             'pluggable.make',
+            'pluggable.enable',
             'pluggable.disable'
         ]);
     }
@@ -127,7 +130,7 @@ class PluggablesServiceProvider extends ServiceProvider
     // TODO: REGISTER CONSOLE COMMANDS
 
     /**
-     * Register the "pluggables:make" console command.
+     * Register the "pluggable:make" console command.
      *
      * @return Console\PluggableMakeCommand
      */
@@ -139,6 +142,29 @@ class PluggablesServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * Register the "pluggable:enable" console command.
+     *
+     * @return Console\PluggableDisableCommand
+     */
+    protected function registerEnableCommand()
+    {
+        $this->app->bindShared('pluggable.enable', function() {
+            return new Console\PluggableDisableCommand;
+        });
+    }
+
+    /**
+     * Register the "pluggable:disable" console command.
+     *
+     * @return Console\PluggableDisableCommand
+     */
+    protected function registerDisableCommand()
+    {
+        $this->app->bindShared('pluggable.disable', function() {
+            return new Console\PluggableDisableCommand;
+        });
+    }
 
 
 }

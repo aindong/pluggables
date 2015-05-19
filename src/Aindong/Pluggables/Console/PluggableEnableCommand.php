@@ -4,17 +4,17 @@ namespace Aindong\Pluggables\Console;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
-class PluggableDisableCommand extends Command
+class PluggableEnableCommand extends Command
 {
     /**
      * @var string $name The console command name.
      */
-    protected $name = 'pluggable:disable';
+    protected $name = 'pluggable:enable';
 
     /**
      * @var string $description The console command description.
      */
-    protected $description = 'Disable a pluggable';
+    protected $description = 'Enable a pluggable';
 
     /**
      * Create a new command instance.
@@ -31,14 +31,14 @@ class PluggableDisableCommand extends Command
      */
     public function fire()
     {
-        $pluggable = $this->argument('module');
+        $pluggable = $this->argument('pluggable');
 
-        if ($this->laravel['pluggables']->isEnabled($this->argument('pluggable'))) {
-            $this->laravel['pluggables']->disable($pluggable);
+        if ($this->laravel['pluggables']->isDisabled($this->argument('pluggable'))) {
+            $this->laravel['pluggables']->enable($pluggable);
 
-            $this->info("Pluggable [{$pluggable}] was disabled successfully.");
+            $this->info("Pluggable [{$pluggable}] was enabled successfully.");
         } else {
-            $this->comment("Pluggable [{$pluggable}] is already disabled.");
+            $this->comment("Pluggable [{$pluggable}] is already enabled.");
         }
     }
 
