@@ -120,7 +120,8 @@ class PluggablesServiceProvider extends ServiceProvider
         $this->registerEnableCommand();
         $this->registerDisableCommand();
         $this->registerListCommand();
-        $this->registerMigrateCommand();
+//        $this->registerMigrateCommand();
+        $this->registerMakeMigrationCommand();
 
         $this->commands([
             'pluggables.makeMigration',
