@@ -29,6 +29,9 @@ class PluggableMakeHandler
         'Resources/',
         'Resources/Lang/',
         'Resources/Views/',
+        'Models/',
+        'Interfaces/',
+        'Repositories/'
     ];
 
     /**
