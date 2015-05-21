@@ -31,7 +31,7 @@ class PluggableDisableCommand extends Command
      */
     public function fire()
     {
-        $pluggable = $this->argument('module');
+        $pluggable = $this->argument('pluggable');
 
         if ($this->laravel['pluggables']->isEnabled($this->argument('pluggable'))) {
             $this->laravel['pluggables']->disable($pluggable);
