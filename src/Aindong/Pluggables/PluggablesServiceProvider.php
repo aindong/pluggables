@@ -72,7 +72,7 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     private function registerServices()
     {
-        $this->app->bindShared('pluggables', function($app) {
+        $this->app->singleton('pluggables', function($app) {
             return new Pluggables($app['config'], $app['files']);
         });
 
@@ -128,7 +128,9 @@ class PluggablesServiceProvider extends ServiceProvider
             'pluggables.enable',
             'pluggables.disable',
             'pluggables.list',
-            'pluggables.make'
+            'pluggables.make',
+            'pluggables.make.request',
+            'pluggables.make.model'
         ]);
     }
 
@@ -141,7 +143,7 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerMakeCommand()
     {
-        $this->app->bindShared('pluggables.make', function($app) {
+        $this->app->singleton('pluggables.make', function($app) {
             $handler = new Handlers\PluggableMakeHandler($app['pluggables'], $app['files']);
             return new Console\PluggableMakeCommand($handler);
         });
@@ -154,7 +156,7 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerEnableCommand()
     {
-        $this->app->bindShared('pluggables.enable', function() {
+        $this->app->singleton('pluggables.enable', function() {
             return new Console\PluggableEnableCommand;
         });
     }
@@ -166,7 +168,7 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerDisableCommand()
     {
-        $this->app->bindShared('pluggables.disable', function() {
+        $this->app->singleton('pluggables.disable', function() {
             return new Console\PluggableDisableCommand;
         });
     }
@@ -178,7 +180,7 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerListCommand()
     {
-        $this->app->bindShared('pluggables.list', function($app) {
+        $this->app->singleton('pluggables.list', function($app) {
             return new Console\PluggableListCommand($app['pluggables']);
         });
     }
@@ -190,7 +192,7 @@ class PluggablesServiceProvider extends ServiceProvider
      */
 //    protected function registerMigrateCommand()
 //    {
-//        $this->app->bindShared('pluggables.migrate', function($app) {
+//        $this->app->singleton('pluggables.migrate', function($app) {
 //            return new Console\PluggableMakeMigrationCommand($app['migrator'], $app['pluggables']);
 //        });
 //    }
@@ -202,11 +204,39 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerMakeMigrationCommand()
     {
-        $this->app->bindShared('pluggables.makeMigration', function($app) {
+        $this->app->singleton('pluggables.makeMigration', function($app) {
             $handler = new Handlers\PluggableMakeMigrationHandler($app['pluggables'], $app['files']);
             return new Console\PluggableMakeMigrationCommand($handler);
         });
     }
+
+
+    /**
+     * Register the "pluggables:make:migration" console command.
+     *
+     * @return Console\PluggableMakeRequestCommand
+     */
+    protected function registerMakeRequestCommand()
+    {
+        $this->app->singleton('pluggables.make.request', function($app) {
+            $handler = new Handlers\PluggableMakeRequestHandler($app['pluggables'], $app['files']);
+            return new Console\PluggableMakeRequestCommand($handler);
+        });
+    }
+
+    /**
+     * Register the "pluggables:make:model" console command.
+     *
+     * @return Console\PluggableMakeModelCommand
+     */
+    protected function registerMakeModelCommand()
+    {
+        $this->app->singleton('pluggables.make.model', function($app) {
+            $handler = new Handlers\PluggableMakeModelHandler($app['pluggables'], $app['files']);
+            return new Console\PluggableMakeModelCommand($handler);
+        });
+    }
+
 
 
 }
