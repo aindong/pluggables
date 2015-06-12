@@ -9,6 +9,3 @@ php:
 before_script:
   - composer selfupdate
   - composer install --prefer-source --no-interaction --dev
-
-after_script:
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
