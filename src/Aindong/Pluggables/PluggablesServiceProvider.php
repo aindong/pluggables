@@ -120,8 +120,11 @@ class PluggablesServiceProvider extends ServiceProvider
         $this->registerEnableCommand();
         $this->registerDisableCommand();
         $this->registerListCommand();
-//        $this->registerMigrateCommand();
+        $this->registerMigrateCommand();
+        $this->registerMigrateRefreshCommand();
         $this->registerMakeMigrationCommand();
+        $this->registerMakeRequestCommand();
+        $this->registerMakeModelCommand();
 
         $this->commands([
             'pluggables.makeMigration',
@@ -130,7 +133,9 @@ class PluggablesServiceProvider extends ServiceProvider
             'pluggables.list',
             'pluggables.make',
             'pluggables.make.request',
-            'pluggables.make.model'
+            'pluggables.make.model'.
+            'pluggables.migrate',
+            'pluggables.migrateRefresh'
         ]);
     }
 
@@ -190,12 +195,19 @@ class PluggablesServiceProvider extends ServiceProvider
      *
      * @return Console\PluggableMakeMigrationCommand
      */
-//    protected function registerMigrateCommand()
-//    {
-//        $this->app->singleton('pluggables.migrate', function($app) {
-//            return new Console\PluggableMakeMigrationCommand($app['migrator'], $app['pluggables']);
-//        });
-//    }
+    protected function registerMigrateCommand()
+    {
+        $this->app->singleton('pluggables.migrate', function($app) {
+            return new Console\PluggableMigrateCommand($app['migrator'], $app['pluggables']);
+        });
+    }
+
+    protected function registerMigrateRefreshCommand()
+    {
+        $this->app->singleton('modules.migrateRefresh', function() {
+            return new Console\PluggableMigrateRefreshCommand;
+        });
+    }
 
     /**
      * Register the "pluggables:make:migration" console command.

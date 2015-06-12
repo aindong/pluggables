@@ -48,7 +48,7 @@ class PluggableMakeRequestHandler
 
     protected function getPath()
     {
-        $path = $this->pluggable->getModulePath($this->moduleName);
+        $path = $this->pluggable->getPluggablePath($this->moduleName);
         return $path.'Http/Requests';
     }
 
