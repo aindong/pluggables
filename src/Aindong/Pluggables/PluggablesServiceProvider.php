@@ -133,7 +133,7 @@ class PluggablesServiceProvider extends ServiceProvider
             'pluggables.list',
             'pluggables.make',
             'pluggables.make.request',
-            'pluggables.make.model'.
+            'pluggables.make.model',
             'pluggables.migrate',
             'pluggables.migrateRefresh'
         ]);
