@@ -5,4 +5,24 @@
 
 ##Pluggables
 ------
-A modular pattern guide/generator for creating a (more modular way) laravel application easily
+A modular pattern guide/generator for creating a (more modular way) laravel application easily. It follows the FIG PSR-1, PSR-2, and PSR-4 coding standards. Pluggables supports the current version of laravel (5.0) and (5.1). 
+
+##QUICK INSTALLATION
+===
+You can install this package using `composer`
+
+`composer require aindong/pluggables=~1.0`
+
+Once the composer operation is complete, locate your `config/app.php` and open it using your editor(vim, sublime, phpstorm, etc). 
+Then add this into the service `providers` array
+
+`'Aindong\Pluggables\PluggablesServiceProvider',`
+
+then scroll down to see the `facade` array and add this
+`'Pluggables' => 'Aindong\Pluggables\Facades\Pluggable',`
+
+and you can start using both the `Plugegables` console commands and facades during the development of your application, to see all the pluggables commands simply type this into your terminal
+`php artisan` and check for `pluggables`. Have fun!
+
+#####NOTES:
+Development stage
