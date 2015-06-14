@@ -1,11 +1,10 @@
-[![Laravel 5.0](https://img.shields.io/badge/Laravel-5.0-orange.svg?style=flat-square)](http://laravel.com)
 [![Laravel 5.1](https://img.shields.io/badge/Laravel-5.1-orange.svg?style=flat-square)](http://laravel.com)
 [![Build Status](https://travis-ci.org/aindong/pluggables.svg?branch=master)](https://travis-ci.org/aindong/pluggables)
 ![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ##Pluggables
 
-A modular pattern guide/generator for creating a (more modular way) laravel application easily. It follows the FIG PSR-1, PSR-2, and PSR-4 coding standards. Pluggables supports the current version of laravel (5.0) and (5.1). 
+A modular pattern guide/generator for creating a (more modular way) laravel application easily. It follows the FIG PSR-1, PSR-2, and PSR-4 coding standards. Pluggables supports the current version of laravel (5.1). 
 
 ##QUICK INSTALLATION
 
@@ -16,10 +15,10 @@ You can install this package using `composer`
 Once the composer operation is complete, locate your `config/app.php` and open it using your editor(vim, sublime, phpstorm, etc). 
 Then add this into the service `providers` array
 
-`'Aindong\Pluggables\PluggablesServiceProvider',`
+`Aindong\Pluggables\PluggablesServiceProvider::class,`
 
 then scroll down to see the `facade` array and add this
-`'Pluggables' => 'Aindong\Pluggables\Facades\Pluggable',`
+`'Pluggables' => Aindong\Pluggables\Facades\Pluggable::class,`
 
 and you can start using both the `Plugegables` console commands and facades during the development of your application, to see all the pluggables commands simply type this into your terminal
 `php artisan` and check for `pluggables`. Have fun!
