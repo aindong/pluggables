@@ -18,6 +18,7 @@ Then add this into the service `providers` array
 `Aindong\Pluggables\PluggablesServiceProvider::class,`
 
 then scroll down to see the `facade` array and add this
+
 `'Pluggables' => Aindong\Pluggables\Facades\Pluggable::class,`
 
 and you can start using both the `Plugegables` console commands and facades during the development of your application, to see all the pluggables commands simply type this into your terminal
