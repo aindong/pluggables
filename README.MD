@@ -4,11 +4,11 @@
 ![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ##Pluggables
-------
+
 A modular pattern guide/generator for creating a (more modular way) laravel application easily. It follows the FIG PSR-1, PSR-2, and PSR-4 coding standards. Pluggables supports the current version of laravel (5.0) and (5.1). 
 
 ##QUICK INSTALLATION
-===
+
 You can install this package using `composer`
 
 `composer require aindong/pluggables=~1.0`
