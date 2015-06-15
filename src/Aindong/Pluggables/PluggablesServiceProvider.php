@@ -204,7 +204,7 @@ class PluggablesServiceProvider extends ServiceProvider
 
     protected function registerMigrateRefreshCommand()
     {
-        $this->app->singleton('modules.migrateRefresh', function() {
+        $this->app->singleton('pluggables.migrateRefresh', function() {
             return new Console\PluggableMigrateRefreshCommand;
         });
     }
