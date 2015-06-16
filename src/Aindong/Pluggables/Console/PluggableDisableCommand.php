@@ -33,13 +33,12 @@ class PluggableDisableCommand extends Command
     {
         $pluggable = $this->argument('pluggable');
 
-        if ($this->laravel['pluggables']->isEnabled($this->argument('pluggable'))) {
-            $this->laravel['pluggables']->disable($pluggable);
-
-            $this->info("Pluggable [{$pluggable}] was disabled successfully.");
-        } else {
+        if (! $this->laravel['pluggables']->isEnabled($this->argument('pluggable'))) {
             $this->comment("Pluggable [{$pluggable}] is already disabled.");
         }
+
+        $this->laravel['pluggables']->disable($pluggable);
+        $this->info("Pluggable [{$pluggable}] was disabled successfully.");
     }
 
     /**

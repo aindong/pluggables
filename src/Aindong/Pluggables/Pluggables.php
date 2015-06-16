@@ -283,12 +283,11 @@ class Pluggables implements Countable
         // Iterate through each pluggable
         foreach ($pluggables as $pluggable) {
 
-            if ($this->isEnabled($pluggable['slug'])) {
-                $enabledPluggables[] = $pluggable;
-            } else {
+            if (! $this->isEnabled($pluggable['slug'])) {
                 $disabledPluggables[] = $pluggable;
             }
 
+            $enabledPluggables[] = $pluggable;
         }
 
         if ($enabled === true) {
@@ -380,15 +379,15 @@ class Pluggables implements Countable
 
         $path = $this->getJsonPath($pluggable);
 
-        if ($this->files->exists($path)) {
-            $contents = $this->files->get($path);
-
-            return json_decode($contents, true);
-        } else {
+        if (! $this->files->exists($path)) {
             $message = "Pluggable [{$pluggable}] must have a valid pluggable.json file.";
 
             throw new FileNotFoundException($message);
         }
+
+        $contents = $this->files->get($path);
+
+        return json_decode($contents, true);
     }
 
     /**

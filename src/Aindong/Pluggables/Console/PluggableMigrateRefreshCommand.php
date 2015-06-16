@@ -57,11 +57,11 @@ class PluggableMigrateRefreshCommand extends Command
             $this->runSeeder($pluggable, $this->option('database'));
         }
 
-        if (isset($pluggable)) {
-            $this->info("Pluggable [$moduleName] has been refreshed.");
-        } else {
-            $this->info("All modules have been refreshed.");
+        if (! isset($pluggable)) {
+            $this->info("All pluggables have been refreshed.");
         }
+
+        $this->info("Pluggable [$moduleName] has been refreshed.");
     }
 
     /**
