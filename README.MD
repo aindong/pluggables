@@ -26,3 +26,6 @@ and you can start using both the `Plugegables` console commands and facades duri
 
 #####NOTES:
 Development stage
+
+#####SOON
+Will add unit tests soon. For those who would like to contribute, you can always contact me @ alleo.indong@gmail.com for now, thank you!
