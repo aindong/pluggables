@@ -21,6 +21,9 @@ then scroll down to see the `facade` array and add this
 
 `'Pluggables' => Aindong\Pluggables\Facades\Pluggable::class,`
 
+after that, you have to set the configuration files of pluggables using
+`php artisan vendor:publish` then look for the pluggables.php on the config folder.
+
 and you can start using both the `Plugegables` console commands and facades during the development of your application, to see all the pluggables commands simply type this into your terminal
 `php artisan` and check for `pluggables`. Have fun!
 
