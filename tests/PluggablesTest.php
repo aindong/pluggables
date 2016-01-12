@@ -1,8 +1,7 @@
 <?php
 
-use Mockery as m;
 use Aindong\Pluggables\Pluggables;
-use Illuminate\Database\Eloquent\Collection;
+use Mockery as m;
 
 class PluggablesTest extends PHPUnit_Framework_TestCase
 {
@@ -13,9 +12,9 @@ class PluggablesTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->config  = m::mock('Illuminate\Config\Repository');
-        $this->files   = m::mock('Illuminate\Filesystem\Filesystem');
-        $this->pluggable  = new Pluggables($this->config, $this->files);
+        $this->config = m::mock('Illuminate\Config\Repository');
+        $this->files = m::mock('Illuminate\Filesystem\Filesystem');
+        $this->pluggable = new Pluggables($this->config, $this->files);
     }
 
     public function tearDown()

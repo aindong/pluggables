@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Traits;
 
 trait MigrationTrait
@@ -6,7 +7,8 @@ trait MigrationTrait
     /**
      * Require (once) all migration files for the supplied module.
      *
-     * @param  string $pluggable
+     * @param string $pluggable
+     *
      * @return void
      */
     protected function requireMigrations($pluggable)
@@ -23,7 +25,8 @@ trait MigrationTrait
     /**
      * Get migration directory path.
      *
-     * @param  string $pluggable
+     * @param string $pluggable
+     *
      * @return string
      */
     protected function getMigrationPath($pluggable)

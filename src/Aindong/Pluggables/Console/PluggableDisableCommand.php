@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Console;
 
 use Illuminate\Console\Command;
@@ -7,12 +8,12 @@ use Symfony\Component\Console\Input\InputArgument;
 class PluggableDisableCommand extends Command
 {
     /**
-     * @var string $name The console command name.
+     * @var string The console command name.
      */
     protected $name = 'pluggables:disable';
 
     /**
-     * @var string $description The console command description.
+     * @var string The console command description.
      */
     protected $description = 'Disable a pluggable';
 
@@ -50,7 +51,7 @@ class PluggableDisableCommand extends Command
     protected function getArguments()
     {
         return [
-            ['pluggable', InputArgument::REQUIRED, 'Pluggable slug.']
+            ['pluggable', InputArgument::REQUIRED, 'Pluggable slug.'],
         ];
     }
 }

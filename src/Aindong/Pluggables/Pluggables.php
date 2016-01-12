@@ -1,9 +1,10 @@
 <?php
+
 namespace Aindong\Pluggables;
 
+use Aindong\Pluggables\Exceptions\FileNotFoundException;
 use App;
 use Countable;
-use Aindong\Pluggables\Exceptions\FileNotFoundException;
 use Illuminate\Config\Repository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Filesystem\Filesystem;
@@ -11,7 +12,6 @@ use Illuminate\Support\Str;
 
 class Pluggables implements Countable
 {
-
     /**
      * @var Repository
      */
@@ -23,12 +23,12 @@ class Pluggables implements Countable
     protected $files;
 
     /**
-     * @var string $path Path to the defined pluggables directory
+     * @var string Path to the defined pluggables directory
      */
     protected $path;
 
     /**
-     * Constructor for dependency injections
+     * Constructor for dependency injections.
      *
      * @param Repository $config
      * @param Filesystem $files
@@ -36,11 +36,11 @@ class Pluggables implements Countable
     public function __construct(Repository $config, Filesystem $files)
     {
         $this->config = $config;
-        $this->files  = $files;
+        $this->files = $files;
     }
 
     /**
-     * Register the module service provider from all pluggables
+     * Register the module service provider from all pluggables.
      */
     public function register()
     {
@@ -50,18 +50,19 @@ class Pluggables implements Countable
     }
 
     /**
-     * Register the module service provider
+     * Register the module service provider.
      *
      * @param $pluggable
+     *
      * @throws FileNotFoundException
      */
     protected function registerServiceProvider($pluggable)
     {
-        $pluggable      = Str::studly($pluggable['slug']);
-        $file           = $this->getPath()."/{$pluggable}/Providers/{$pluggable}ServiceProvider.php";
-        $namespace      = $this->getNamespace()."{$pluggable}\\Providers\\{$pluggable}ServiceProvider";
+        $pluggable = Str::studly($pluggable['slug']);
+        $file = $this->getPath()."/{$pluggable}/Providers/{$pluggable}ServiceProvider.php";
+        $namespace = $this->getNamespace()."{$pluggable}\\Providers\\{$pluggable}ServiceProvider";
 
-        if ( ! $this->files->exists($file)) {
+        if (!$this->files->exists($file)) {
             $message = "Pluggable [{$pluggable}] must have a \"{$pluggable}/Providers/{$pluggable}ServiceProvider.php\" file";
 
             throw new FileNotFoundException($message);
@@ -71,14 +72,14 @@ class Pluggables implements Countable
     }
 
     /**
-     * Get all the pluggables
+     * Get all the pluggables.
      *
      * @return Collection
      */
     public function all()
     {
-        $pluggables     = [];
-        $allPlugs       = $this->getAllBaseNames();
+        $pluggables = [];
+        $allPlugs = $this->getAllBaseNames();
 
         foreach ($allPlugs as $plug) {
             $pluggables[] = $this->getJsonContents($plug);
@@ -88,7 +89,7 @@ class Pluggables implements Countable
     }
 
     /**
-     * Get all pluggable basenames
+     * Get all pluggable basenames.
      *
      * @return array
      */
@@ -96,9 +97,9 @@ class Pluggables implements Countable
     {
         $pluggables = [];
 
-        $path    = $this->getPath();
+        $path = $this->getPath();
 
-        if ( ! is_dir($path)) {
+        if (!is_dir($path)) {
             return $pluggables;
         }
 
@@ -119,9 +120,8 @@ class Pluggables implements Countable
     protected function getAllSlugs()
     {
         $pluggables = $this->all();
-        $slugs   = array();
-        foreach ($pluggables as $plug)
-        {
+        $slugs = [];
+        foreach ($pluggables as $plug) {
             $slugs[] = $plug['slug'];
         }
 
@@ -131,7 +131,8 @@ class Pluggables implements Countable
     /**
      * Check if given pluggable path exists.
      *
-     * @param  string  $folder
+     * @param string $folder
+     *
      * @return bool
      */
     protected function pathExists($folder)
@@ -144,7 +145,8 @@ class Pluggables implements Countable
     /**
      * Check if the given pluggable exists.
      *
-     * @param  string  $slug
+     * @param string $slug
+     *
      * @return bool
      */
     public function exists($slug)
@@ -177,7 +179,8 @@ class Pluggables implements Countable
     /**
      * Set pluggables path in "RunTime" mode.
      *
-     * @param  string $path
+     * @param string $path
+     *
      * @return object $this
      */
     public function setPath($path)
@@ -200,15 +203,16 @@ class Pluggables implements Countable
     /**
      * Get path for the specified pluggable.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return string
      */
     public function getPluggablePath($slug, $allowNotExists = false)
     {
         $pluggable = Str::studly($slug);
 
-        if ( ! $this->pathExists($pluggable) && $allowNotExists === false) {
-            return null;
+        if (!$this->pathExists($pluggable) && $allowNotExists === false) {
+            return;
         }
 
         return $this->getPath()."/{$pluggable}/";
@@ -217,7 +221,8 @@ class Pluggables implements Countable
     /**
      * Get a pluggable's properties.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return mixed
      */
     public function getProperties($slug)
@@ -228,8 +233,9 @@ class Pluggables implements Countable
     /**
      * Get a pluggable property value.
      *
-     * @param  string $property
-     * @param  mixed  $default
+     * @param string $property
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function getProperty($property, $default = null)
@@ -242,8 +248,9 @@ class Pluggables implements Countable
     /**
      * Set a pluggale property value.
      *
-     * @param  string $property
-     * @param  mixed  $value
+     * @param string $property
+     * @param mixed  $value
+     *
      * @return bool
      */
     public function setProperty($property, $value)
@@ -266,29 +273,27 @@ class Pluggables implements Countable
         return false;
     }
 
-
     /**
-     * Find a pluggable with enabled status given
+     * Find a pluggable with enabled status given.
      *
-     * @param  bool $enabled
+     * @param bool $enabled
+     *
      * @return array
      */
     public function getByEnabled($enabled = true)
     {
-        $disabledPluggables = array();
-        $enabledPluggables  = array();
+        $disabledPluggables = [];
+        $enabledPluggables = [];
 
-        $pluggables         = $this->all();
+        $pluggables = $this->all();
 
         // Iterate through each pluggable
         foreach ($pluggables as $pluggable) {
-
             if ($this->isEnabled($pluggable['slug'])) {
                 $enabledPluggables[] = $pluggable;
             } else {
                 $disabledPluggables[] = $pluggable;
             }
-
         }
 
         if ($enabled === true) {
@@ -321,7 +326,8 @@ class Pluggables implements Countable
     /**
      * Check if specified pluggable is enabled.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return bool
      */
     public function isEnabled($slug)
@@ -332,7 +338,8 @@ class Pluggables implements Countable
     /**
      * Check if specified pluggable is disabled.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return bool
      */
     public function isDisabled($slug)
@@ -343,7 +350,8 @@ class Pluggables implements Countable
     /**
      * Enables the specified pluggable.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return bool
      */
     public function enable($slug)
@@ -354,7 +362,8 @@ class Pluggables implements Countable
     /**
      * Disables the specified pluggable.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return bool
      */
     public function disable($slug)
@@ -365,16 +374,18 @@ class Pluggables implements Countable
     /**
      * Get pluggable JSON content as an array.
      *
-     * @param  string $pluggable
-     * @return array|mixed
+     * @param string $pluggable
+     *
      * @throws FileNotFoundException
+     *
+     * @return array|mixed
      */
     protected function getJsonContents($pluggable)
     {
         $pluggable = Str::studly($pluggable);
         $default = [];
 
-        if ( ! $this->pathExists($pluggable)) {
+        if (!$this->pathExists($pluggable)) {
             return $default;
         }
 
@@ -394,8 +405,9 @@ class Pluggables implements Countable
     /**
      * Set pluggable JSON content property value.
      *
-     * @param  string $pluggable
-     * @param  array  $content
+     * @param string $pluggable
+     * @param array  $content
+     *
      * @return int
      */
     public function setJsonContents($pluggable, array $content)
@@ -409,7 +421,8 @@ class Pluggables implements Countable
     /**
      * Get path of pluggable JSON file.
      *
-     * @param  string $module
+     * @param string $module
+     *
      * @return string
      */
     protected function getJsonPath($module)
@@ -420,15 +433,16 @@ class Pluggables implements Countable
     /**
      * Sort pluggables by order.
      *
-     * @param  array  $pluggables
+     * @param array $pluggables
+     *
      * @return array
      */
     public function sortByOrder($pluggables)
     {
-        $orderedPluggables = array();
+        $orderedPluggables = [];
 
         foreach ($pluggables as $pluggable) {
-            if (! isset($pluggable['order'])) {
+            if (!isset($pluggable['order'])) {
                 $pluggable['order'] = 9001;  // It's over 9000!
             }
             $orderedPluggables[] = $pluggable;
@@ -449,18 +463,19 @@ class Pluggables implements Countable
     protected function arrayOrderBy()
     {
         $arguments = func_get_args();
-        $data      = array_shift($arguments);
+        $data = array_shift($arguments);
         foreach ($arguments as $argument => $field) {
             if (is_string($field)) {
-                $temp = array();
+                $temp = [];
                 foreach ($data as $key => $row) {
                     $temp[$key] = $row[$field];
                 }
                 $arguments[$argument] = $temp;
             }
         }
-        $arguments[] =& $data;
+        $arguments[] = &$data;
         call_user_func_array('array_multisort', $arguments);
+
         return array_pop($arguments);
     }
 }

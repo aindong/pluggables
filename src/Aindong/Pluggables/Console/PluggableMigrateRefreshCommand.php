@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Console;
 
 use Illuminate\Console\Command;
@@ -12,12 +13,12 @@ class PluggableMigrateRefreshCommand extends Command
     use ConfirmableTrait;
 
     /**
-     * @var string $name The console command name.
+     * @var string The console command name.
      */
     protected $name = 'pluggables:migrate:refresh';
 
     /**
-     * @var string $description The console command description.
+     * @var string The console command description.
      */
     protected $description = 'Reset and re-run all migrations for a specific or all pluggables';
 
@@ -36,9 +37,11 @@ class PluggableMigrateRefreshCommand extends Command
      */
     public function fire()
     {
-        if (! $this->confirmToProceed()) return null;
+        if (!$this->confirmToProceed()) {
+            return;
+        }
 
-        $pluggable     = $this->argument('pluggable');
+        $pluggable = $this->argument('pluggable');
         $moduleName = Str::studly($pluggable);
 
         $this->call('pluggables:migrate:reset', [
@@ -50,7 +53,7 @@ class PluggableMigrateRefreshCommand extends Command
 
         $this->call('pluggables:migrate', [
             'module'     => $pluggable,
-            '--database' => $this->option('database')
+            '--database' => $this->option('database'),
         ]);
 
         if ($this->needsSeeding()) {
@@ -60,7 +63,7 @@ class PluggableMigrateRefreshCommand extends Command
         if (isset($pluggable)) {
             $this->info("Pluggable [$moduleName] has been refreshed.");
         } else {
-            $this->info("All modules have been refreshed.");
+            $this->info('All modules have been refreshed.');
         }
     }
 
@@ -77,14 +80,15 @@ class PluggableMigrateRefreshCommand extends Command
     /**
      * Run the module seeder command.
      *
-     * @param  string $database
+     * @param string $database
+     *
      * @return void
      */
     protected function runSeeder($module = null, $database = null)
     {
         $this->call('pluggables:seed', [
             'pluggable'     => $this->argument('pluggable'),
-            '--database' => $database
+            '--database'    => $database,
         ]);
     }
 
@@ -109,7 +113,7 @@ class PluggableMigrateRefreshCommand extends Command
             ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run while in production.'],
             ['pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.'],
-            ['seed', null, InputOption::VALUE_NONE, 'Indicates if the seed task should be re-run.']
+            ['seed', null, InputOption::VALUE_NONE, 'Indicates if the seed task should be re-run.'],
         ];
     }
 }

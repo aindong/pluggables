@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Console;
 
 use Aindong\Pluggables\Handlers\PluggableMakeMigrationHandler;
@@ -8,12 +9,12 @@ use Symfony\Component\Console\Input\InputArgument;
 class PluggableMakeMigrationCommand extends Command
 {
     /**
-     * @var string $name The console command name.
+     * @var string The console command name.
      */
     protected $name = 'pluggables:make:migration';
 
     /**
-     * @var string $description The console command description.
+     * @var string The console command description.
      */
     protected $description = 'Create a new pluggable migration file';
 
@@ -53,7 +54,7 @@ class PluggableMakeMigrationCommand extends Command
     {
         return [
             ['pluggable', InputArgument::REQUIRED, 'Pluggable slug.'],
-            ['table', InputArgument::REQUIRED, 'Table name.']
+            ['table', InputArgument::REQUIRED, 'Table name.'],
         ];
     }
 }
