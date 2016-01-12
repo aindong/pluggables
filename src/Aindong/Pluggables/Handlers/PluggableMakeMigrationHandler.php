@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Handlers;
 
 use Aindong\Pluggables\Pluggables;
@@ -24,29 +25,29 @@ class PluggableMakeMigrationHandler
     protected $console;
 
     /**
-     * @var string $moduleName The name of the module
+     * @var string The name of the module
      */
     protected $pluggableName;
 
     /**
-     * @var string $table The name of the table
+     * @var string The name of the table
      */
     protected $table;
 
     /**
-     * @var string $migrationName The name of the migration
+     * @var string The name of the migration
      */
     protected $migrationName;
 
     /**
-     * @var string $className The name of the migration class
+     * @var string The name of the migration class
      */
     protected $className;
 
     /**
      * Constructor method.
      *
-     * @param Pluggables      $module
+     * @param Pluggables                        $module
      * @param \Illuminate\Filesystem\Filesystem $finder
      */
     public function __construct(Pluggables $pluggable, Filesystem $finder)
@@ -58,17 +59,18 @@ class PluggableMakeMigrationHandler
     /**
      * Fire off the handler.
      *
-     * @param  \Aindong\Pluggables\Console\PluggableMakeMigrationCommand    $console
-     * @param  string                                                       $slug
+     * @param \Aindong\Pluggables\Console\PluggableMakeMigrationCommand $console
+     * @param string                                                    $slug
+     *
      * @return string
      */
     public function fire(Command $console, $slug, $table)
     {
-        $this->console          = $console;
-        $this->pluggableName    = Str::studly($slug);
-        $this->table            = strtolower($table);
-        $this->migrationName    = snake_case($this->table);
-        $this->className        = studly_case($this->migrationName);
+        $this->console = $console;
+        $this->pluggableName = Str::studly($slug);
+        $this->table = strtolower($table);
+        $this->migrationName = snake_case($this->table);
+        $this->className = studly_case($this->migrationName);
 
         if ($this->pluggable->exists($this->pluggableName)) {
             $this->makeFile();
@@ -120,7 +122,7 @@ class PluggableMakeMigrationHandler
      */
     protected function getFilename()
     {
-        return date("Y_m_d_His").'_'.$this->migrationName.'.php';
+        return date('Y_m_d_His').'_'.$this->migrationName.'.php';
     }
 
     /**
@@ -136,7 +138,8 @@ class PluggableMakeMigrationHandler
     /**
      * Replace placeholder text with correct values.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return string
      */
     protected function formatContent($content)

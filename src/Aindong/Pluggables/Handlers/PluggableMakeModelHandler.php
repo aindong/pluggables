@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Handlers;
 
 use Aindong\Pluggables\Pluggables;
@@ -21,18 +22,20 @@ class PluggableMakeModelHandler
     public function __construct(Pluggables $pluggable, Filesystem $finder)
     {
         $this->pluggable = $pluggable;
-        $this->finder    = $finder;
+        $this->finder = $finder;
     }
 
     public function fire(Command $console, $slug, $class)
     {
-        $this->console       = $console;
-        $this->moduleName    = Str::studly($slug);
-        $this->className     = studly_case($class);
+        $this->console = $console;
+        $this->moduleName = Str::studly($slug);
+        $this->className = studly_case($class);
         if ($this->pluggable->exists($this->moduleName)) {
             $this->makeFile();
+
             return $this->console->info("Created Module Model: [$this->moduleName] ".$this->getFilename());
         }
+
         return $this->console->info("Module [$this->moduleName] does not exist.");
     }
 
@@ -49,6 +52,7 @@ class PluggableMakeModelHandler
     protected function getPath()
     {
         $path = $this->pluggable->getPluggablePath($this->moduleName);
+
         return $path.'Models';
     }
 
@@ -70,7 +74,4 @@ class PluggableMakeModelHandler
             $content
         );
     }
-
-
-
 }

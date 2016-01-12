@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Console;
 
 use Aindong\Pluggables\Pluggables;
@@ -7,12 +8,12 @@ use Illuminate\Console\Command;
 class PluggableListCommand extends Command
 {
     /**
-     * @var string $name The console command name.
+     * @var string The console command name.
      */
     protected $name = 'pluggables:list';
 
     /**
-     * @var string $description The console command description.
+     * @var string The console command description.
      */
     protected $description = 'List all application pluggables';
 
@@ -22,7 +23,7 @@ class PluggableListCommand extends Command
     protected $pluggable;
 
     /**
-     * @var array $header The table headers for the command.
+     * @var array The table headers for the command.
      */
     protected $headers = ['Name', 'Slug', 'Description', 'Status'];
 
@@ -47,8 +48,7 @@ class PluggableListCommand extends Command
     {
         $pluggables = $this->pluggable->all();
 
-        if (count($pluggables) == 0)
-        {
+        if (count($pluggables) == 0) {
             return $this->error("Your application doesn't have any pluggables.");
         }
 
@@ -63,10 +63,9 @@ class PluggableListCommand extends Command
     protected function getPluggables()
     {
         $pluggables = $this->pluggable->all();
-        $results = array();
+        $results = [];
 
-        foreach ($pluggables as $pluggable)
-        {
+        foreach ($pluggables as $pluggable) {
             $results[] = $this->getPluggableInformation($pluggable);
         }
 
@@ -76,7 +75,8 @@ class PluggableListCommand extends Command
     /**
      * Returns pluggable manifest information.
      *
-     * @param  string $pluggable
+     * @param string $pluggable
+     *
      * @return array
      */
     protected function getPluggableInformation($pluggable)
@@ -85,14 +85,15 @@ class PluggableListCommand extends Command
             'name'        => $pluggable['name'],
             'slug'        => $pluggable['slug'],
             'description' => $pluggable['description'],
-            'status'      => ($pluggable['enabled']) ? 'Enabled' : 'Disabled'
+            'status'      => ($pluggable['enabled']) ? 'Enabled' : 'Disabled',
         ];
     }
 
     /**
      * Display the pluggable information on the console.
      *
-     * @param  array $pluggables
+     * @param array $pluggables
+     *
      * @return void
      */
     protected function displayPluggables(array $pluggables)

@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Console;
 
 use Aindong\Pluggables\Handlers\PluggableMakeHandler;
@@ -8,12 +9,12 @@ use Symfony\Component\Console\Input\InputArgument;
 class PluggableMakeCommand extends Command
 {
     /**
-     * @var string $name The console command name.
+     * @var string The console command name.
      */
     protected $name = 'pluggables:make';
 
     /**
-     * @var string $description The console command description.
+     * @var string The console command description.
      */
     protected $description = 'Create a new pluggable';
 
@@ -51,7 +52,7 @@ class PluggableMakeCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'Pluggable slug.']
+            ['name', InputArgument::REQUIRED, 'Pluggable slug.'],
         ];
     }
 }

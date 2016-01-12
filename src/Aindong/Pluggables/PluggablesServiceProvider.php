@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables;
 
 use Illuminate\Database\Migrations\DatabaseMigrationRepository;
@@ -8,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 class PluggablesServiceProvider extends ServiceProvider
 {
     /**
-     * @var bool $defer Indicates if loading of the provider is deferred.
+     * @var bool Indicates if loading of the provider is deferred.
      */
     protected $defer = false;
 
@@ -27,7 +28,7 @@ class PluggablesServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the service provider
+     * Register the service provider.
      *
      * @return void
      */
@@ -56,7 +57,7 @@ class PluggablesServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get the services provided by the provider
+     * Get the services provided by the provider.
      *
      * @return array
      */
@@ -66,43 +67,41 @@ class PluggablesServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register services of the package
+     * Register services of the package.
      *
      * @return void
      */
     private function registerServices()
     {
-        $this->app->singleton('pluggables', function($app) {
+        $this->app->singleton('pluggables', function ($app) {
             return new Pluggables($app['config'], $app['files']);
         });
 
-        $this->app->booting(function($app) {
+        $this->app->booting(function ($app) {
             $app['pluggables']->register();
         });
     }
 
     /**
-     * Register the repository service
+     * Register the repository service.
      */
-    private  function registerRepository()
+    private function registerRepository()
     {
-        $this->app->singleton('migration.repository', function($app) {
+        $this->app->singleton('migration.repository', function ($app) {
             $table = $app['config']['database.migrations'];
 
             return new DatabaseMigrationRepository($app['db'], $table);
         });
-
-
     }
 
     /**
-     * Register the migrator
+     * Register the migrator.
      *
      * @return void
      */
     private function registerMigrator()
     {
-        $this->app->singleton('migrator', function($app) {
+        $this->app->singleton('migrator', function ($app) {
             $repository = $app['migration.repository'];
 
             return new Migrator($repository, $app['db'], $app['files']);
@@ -110,7 +109,7 @@ class PluggablesServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the package console commands
+     * Register the package console commands.
      *
      * @return void
      */
@@ -135,7 +134,7 @@ class PluggablesServiceProvider extends ServiceProvider
             'pluggables.make.request',
             'pluggables.make.model',
             'pluggables.migrate',
-            'pluggables.migrateRefresh'
+            'pluggables.migrateRefresh',
         ]);
     }
 
@@ -148,8 +147,9 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerMakeCommand()
     {
-        $this->app->singleton('pluggables.make', function($app) {
+        $this->app->singleton('pluggables.make', function ($app) {
             $handler = new Handlers\PluggableMakeHandler($app['pluggables'], $app['files']);
+
             return new Console\PluggableMakeCommand($handler);
         });
     }
@@ -161,8 +161,8 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerEnableCommand()
     {
-        $this->app->singleton('pluggables.enable', function() {
-            return new Console\PluggableEnableCommand;
+        $this->app->singleton('pluggables.enable', function () {
+            return new Console\PluggableEnableCommand();
         });
     }
 
@@ -173,8 +173,8 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerDisableCommand()
     {
-        $this->app->singleton('pluggables.disable', function() {
-            return new Console\PluggableDisableCommand;
+        $this->app->singleton('pluggables.disable', function () {
+            return new Console\PluggableDisableCommand();
         });
     }
 
@@ -185,7 +185,7 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerListCommand()
     {
-        $this->app->singleton('pluggables.list', function($app) {
+        $this->app->singleton('pluggables.list', function ($app) {
             return new Console\PluggableListCommand($app['pluggables']);
         });
     }
@@ -197,15 +197,15 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerMigrateCommand()
     {
-        $this->app->singleton('pluggables.migrate', function($app) {
+        $this->app->singleton('pluggables.migrate', function ($app) {
             return new Console\PluggableMigrateCommand($app['migrator'], $app['pluggables']);
         });
     }
 
     protected function registerMigrateRefreshCommand()
     {
-        $this->app->singleton('pluggables.migrateRefresh', function() {
-            return new Console\PluggableMigrateRefreshCommand;
+        $this->app->singleton('pluggables.migrateRefresh', function () {
+            return new Console\PluggableMigrateRefreshCommand();
         });
     }
 
@@ -216,12 +216,12 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerMakeMigrationCommand()
     {
-        $this->app->singleton('pluggables.makeMigration', function($app) {
+        $this->app->singleton('pluggables.makeMigration', function ($app) {
             $handler = new Handlers\PluggableMakeMigrationHandler($app['pluggables'], $app['files']);
+
             return new Console\PluggableMakeMigrationCommand($handler);
         });
     }
-
 
     /**
      * Register the "pluggables:make:migration" console command.
@@ -230,8 +230,9 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerMakeRequestCommand()
     {
-        $this->app->singleton('pluggables.make.request', function($app) {
+        $this->app->singleton('pluggables.make.request', function ($app) {
             $handler = new Handlers\PluggableMakeRequestHandler($app['pluggables'], $app['files']);
+
             return new Console\PluggableMakeRequestCommand($handler);
         });
     }
@@ -243,12 +244,10 @@ class PluggablesServiceProvider extends ServiceProvider
      */
     protected function registerMakeModelCommand()
     {
-        $this->app->singleton('pluggables.make.model', function($app) {
+        $this->app->singleton('pluggables.make.model', function ($app) {
             $handler = new Handlers\PluggableMakeModelHandler($app['pluggables'], $app['files']);
+
             return new Console\PluggableMakeModelCommand($handler);
         });
     }
-
-
-
 }

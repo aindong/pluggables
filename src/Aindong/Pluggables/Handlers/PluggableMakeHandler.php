@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Handlers;
 
 use Aindong\Pluggables\Pluggables;
@@ -14,7 +15,7 @@ class PluggableMakeHandler
     protected $console;
 
     /**
-     * @var array $folders Module folders to be created.
+     * @var array Module folders to be created.
      */
     protected $folders = [
         'Console/',
@@ -31,29 +32,29 @@ class PluggableMakeHandler
         'Resources/Views/',
         'Models/',
         'Interfaces/',
-        'Repositories/'
+        'Repositories/',
     ];
 
     /**
-     * @var array $files Module files to be created.
+     * @var array Module files to be created.
      */
     protected $files = [
         'Database/Seeds/{{name}}DatabaseSeeder.php',
         'Http/routes.php',
         'Providers/{{name}}ServiceProvider.php',
         'Providers/RouteServiceProvider.php',
-        'pluggable.json'
+        'pluggable.json',
     ];
 
     /**
-     * @var array $stubs Module stubs used to populate defined files.
+     * @var array Module stubs used to populate defined files.
      */
     protected $stubs = [
         'seeder.stub',
         'routes.stub',
         'moduleserviceprovider.stub',
         'routeserviceprovider.stub',
-        'pluggable.stub'
+        'pluggable.stub',
     ];
 
     /**
@@ -91,15 +92,16 @@ class PluggableMakeHandler
     /**
      * Fire off the handler.
      *
-     * @param  \Aindong\Pluggables\Console\PluggableMakeCommand $console
-     * @param  string                                         $slug
+     * @param \Aindong\Pluggables\Console\PluggableMakeCommand $console
+     * @param string                                           $slug
+     *
      * @return bool
      */
     public function fire(Command $console, $slug)
     {
         $this->console = $console;
-        $this->slug    = strtolower($slug);
-        $this->name    = Str::studly($slug);
+        $this->slug = strtolower($slug);
+        $this->name = Str::studly($slug);
 
         if ($this->pluggable->exists($this->slug)) {
             $console->comment('Pluggable [{$this->name}] already exists.');
@@ -113,8 +115,9 @@ class PluggableMakeHandler
     /**
      * Generate pluggable folders and files.
      *
-     * @param  \Aindong\Pluggables\Console\PluggableMakeCommand $console
-     * @return boolean
+     * @param \Aindong\Pluggables\Console\PluggableMakeCommand $console
+     *
+     * @return bool
      */
     public function generate(Command $console)
     {
@@ -136,7 +139,7 @@ class PluggableMakeHandler
      */
     protected function generateFolders()
     {
-        if (! $this->finder->isDirectory($this->pluggable->getPath())) {
+        if (!$this->finder->isDirectory($this->pluggable->getPath())) {
             $this->finder->makeDirectory($this->pluggable->getPath());
         }
 
@@ -171,7 +174,7 @@ class PluggableMakeHandler
         $pluggablePath = $this->getPluggablePath($this->slug);
 
         foreach ($this->folders as $folder) {
-            $gitkeep    = $pluggablePath.$folder.'/.gitkeep';
+            $gitkeep = $pluggablePath.$folder.'/.gitkeep';
 
             $this->finder->put($gitkeep, '');
         }
@@ -180,8 +183,9 @@ class PluggableMakeHandler
     /**
      * Create pluggable file.
      *
-     * @param  int     $key
-     * @param  string  $file
+     * @param int    $key
+     * @param string $file
+     *
      * @return int
      */
     protected function makeFile($key, $file)
@@ -192,7 +196,8 @@ class PluggableMakeHandler
     /**
      * Get the path to the pluggable.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return string
      */
     protected function getPluggablePath($slug = null, $allowNotExists = false)
@@ -207,7 +212,8 @@ class PluggableMakeHandler
     /**
      * Get destination file.
      *
-     * @param  string $file
+     * @param string $file
+     *
      * @return string
      */
     protected function getDestinationFile($file)
@@ -218,7 +224,8 @@ class PluggableMakeHandler
     /**
      * Get stub content by key.
      *
-     * @param  int $key
+     * @param int $key
+     *
      * @return string
      */
     protected function getStubContent($key)

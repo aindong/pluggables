@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Console;
 
 use Aindong\Pluggables\Handlers\PluggableMakeModelHandler;
@@ -8,12 +9,12 @@ use Symfony\Component\Console\Input\InputArgument;
 class PluggableMakeModelCommand extends Command
 {
     /**
-     * @var string $name The console command name.
+     * @var string The console command name.
      */
     protected $name = 'pluggables:make:model';
 
     /**
-     * @var string $description The console command description.
+     * @var string The console command description.
      */
     protected $description = 'Create a new pluggable model class';
 
@@ -24,6 +25,7 @@ class PluggableMakeModelCommand extends Command
         parent::__construct();
         $this->handler = $handler;
     }
+
     /**
      * Execute the console command.
      *
@@ -43,7 +45,7 @@ class PluggableMakeModelCommand extends Command
     {
         return [
             ['pluggable', InputArgument::REQUIRED, 'The slug of the pluggable'],
-            ['name', InputArgument::REQUIRED, 'The name of the class']
+            ['name', InputArgument::REQUIRED, 'The name of the class'],
         ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Console;
 
 use Aindong\Pluggables\Handlers\PluggableMakeRequestHandler;
@@ -8,12 +9,12 @@ use Symfony\Component\Console\Input\InputArgument;
 class PluggableMakeRequestCommand extends Command
 {
     /**
-     * @var string $name The console command name.
+     * @var string The console command name.
      */
     protected $name = 'pluggables:make:request';
 
     /**
-     * @var string $description The console command description.
+     * @var string The console command description.
      */
     protected $description = 'Create a new pluggable form request class';
 
@@ -44,7 +45,7 @@ class PluggableMakeRequestCommand extends Command
     {
         return [
             ['pluggable', InputArgument::REQUIRED, 'The slug of the pluggable'],
-            ['name', InputArgument::REQUIRED, 'The name of the class']
+            ['name', InputArgument::REQUIRED, 'The name of the class'],
         ];
     }
 }

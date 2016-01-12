@@ -24,5 +24,5 @@ return [
     | by the module:make Artisan command.
     |
     */
-    'namespace' => 'App\Pluggables\\'
+    'namespace' => 'App\Pluggables\\',
 ];

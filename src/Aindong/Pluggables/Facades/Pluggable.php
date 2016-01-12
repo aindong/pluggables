@@ -1,4 +1,5 @@
 <?php
+
 namespace Aindong\Pluggables\Facades;
 
 use Illuminate\Support\Facades\Facade;
