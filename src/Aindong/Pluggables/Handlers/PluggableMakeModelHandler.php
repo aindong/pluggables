@@ -53,7 +53,7 @@ class PluggableMakeModelHandler
     {
         $path = $this->pluggable->getPluggablePath($this->moduleName);
 
-        return $path.'Models';
+        return $path.'Models/';
     }
 
     protected function getFilename()
